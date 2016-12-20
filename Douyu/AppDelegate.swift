@@ -9,14 +9,33 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let vc = ViewController()
+        window = UIWindow.init(frame: UIScreen.main.bounds)
+        window?.backgroundColor = UIColor.white
+        let main = MainVC()
+        let navi = UINavigationController.init(rootViewController: main)
+        navi.isNavigationBarHidden = true
+        let tab = UITabBarController.init()
+        tab.viewControllers = [navi, vc]
+        
+        window?.rootViewController = tab
+        window?.makeKeyAndVisible()
+        
+        
+        
         return true
+    }
+    
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
@@ -40,6 +59,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
+    
+//    func application(_ application: UIApplication, handleActionWithIdentifier identifier: String?, forRemoteNotification userInfo: [AnyHashable : Any], completionHandler: @escaping () -> Void) {
+//        
+//        application.applicationIconBadgeNumber = 1
+//    }
 
 
 }
